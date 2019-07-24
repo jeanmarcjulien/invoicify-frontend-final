@@ -32,6 +32,7 @@ export class InvoiceFormComponent implements OnInit {
   ngOnInit() { 
     this.getBillingRecords(); 
     this.getCompanies();
+
   }
 
   getBillingRecords() {

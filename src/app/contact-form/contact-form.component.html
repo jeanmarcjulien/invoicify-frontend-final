@@ -1,0 +1,85 @@
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/contact">Contacts</a></li>
+    <li class="active">Manage Contact</li>
+  </ol>
+
+  <a class="btn btn-primary" routerLink="/contact">Return to Contacts</a>
+
+  <h1>Manage Contacts</h1>
+
+  <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
+
+  <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Company</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #contact="ngModel" class="form-control" id="contact" name="Contact">
+          <option [ngValue]="null">-- Select Company --</option>
+          <option *ngFor="let company of companies" [ngValue]="company.id">
+            {{ company.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Type</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #contact="ngModel" class="form-control" id="contact" name="Contact">
+          <option [ngValue]="null">-- Select Type --</option>
+          <option>Primary</option> 
+          <option>Secondary</option>
+        </select>
+      </div>
+    </div>
+    <input [ngModel]="first_name?.id" ngModel #first_name="ngModel" type="hidden" name="">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-10">
+        <input [ngModel]="first_name?.name" ngModel #name="ngModel" type="text" class="form-control" id="name" name="name" placeholder="First Name" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.name" class="text-danger">
+        {{ formErrors.name }}
+        </span>
+      </div>
+    </div> 
+
+    <input [ngModel]="last_name?.id" ngModel #last_name="ngModel" type="hidden" name="">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-10">
+        <input [ngModel]="last_name?.name" ngModel #name="ngModel" type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.name" class="text-danger">
+        {{ formErrors.name }}
+        </span>
+      </div>
+    </div> 
+
+    <input [ngModel]="phone_number?.id" ngModel #phone_number="ngModel" type="hidden" name="">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input [ngModel]="phone_number?.name" ngModel #name="ngModel" type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.name" class="text-danger">
+        {{ formErrors.name }}
+        </span>
+      </div>
+    </div> 
+
+    
+    <input [ngModel]="email?.id" ngModel #email="ngModel" type="hidden" name="">
+    <div class="form-group">
+      <label for="name" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input [ngModel]="email?.name" ngModel #name="ngModel" type="text" class="form-control" id="email" name="email" placeholder="Email" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.name" class="text-danger">
+        {{ formErrors.name }}
+        </span>
+      </div>
+    </div> 
+    
+
+    
+    </form>
+</section>
