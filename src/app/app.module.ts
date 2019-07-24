@@ -41,7 +41,7 @@ import { ContactComponent } from './contact/contact.component';
     BillingRecordFormComponent,
     InvoiceFormComponent,
     InvoiceComponent,
-    ContactComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
