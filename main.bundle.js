@@ -760,7 +760,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
-        this.baseUrl = 'https://api-invoicify-phase2.herokuapp.com/api/';
+        this.baseUrl = 'https://morning-hollows-64649.herokuapp.com/api/';
         this.found = false;
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* RequestOptions */]({ withCredentials: true });
     }
