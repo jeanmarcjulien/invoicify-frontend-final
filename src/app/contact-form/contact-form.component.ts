@@ -21,9 +21,7 @@ export class ContactFormComponent implements OnInit {
 
   successMessage: string;
   errorMessage: string;
-
   companies: any[];
-
   contact: object;
 
   constructor(
