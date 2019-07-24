@@ -22,6 +22,8 @@ export class ContactFormComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
 
+  companies: any[];
+
   contact: object;
 
   constructor(
@@ -41,6 +43,13 @@ export class ContactFormComponent implements OnInit {
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
       });
+      this.getCompanies();
+  }
+  getCompanies(){
+    this.dataService.getRecords("company")
+    .subscribe(
+      companies => this.companies = companies,
+      error =>  this.errorMessage = <any>error);
   }
 
   saveContact(contactForm: NgForm){

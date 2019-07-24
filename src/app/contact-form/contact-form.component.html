@@ -11,5 +11,17 @@
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
-  
+  <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Contact</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #contact="ngModel" class="form-control" id="contact" name="Contact">
+          <option [ngValue]="null">-- Select Contact --</option>
+          <option *ngFor="let contact of contacts" [ngValue]="contact.id">
+            {{ contact.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    </form>
 </section>
