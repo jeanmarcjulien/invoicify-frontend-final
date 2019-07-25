@@ -1,0 +1,83 @@
+<section @fadeInAnimation>
+  <ol class="breadcrumb">
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/contact">Contacts</a></li>
+    <li class="active">Manage Contact</li>
+  </ol>
+
+  <a class="btn btn-primary" routerLink="/contact">Return to Contacts</a>
+
+  <h1>Manage Contacts</h1>
+
+  <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
+
+  <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Company</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #contact="ngModel" class="form-control" id="contact" name="Contact">
+          <option [ngValue]="null">-- Select Company --</option>
+          <option *ngFor="let company of companies" [ngValue]="company.id">
+            {{ company.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="client" class="col-sm-2 control-label">Type</label>
+      <div class="col-sm-10">
+        <select required [ngModel]="null" ngModel #contact="ngModel" class="form-control" id="contact" name="Contact">
+          <option [ngValue]="null">-- Select Type --</option>
+          <option>Primary</option> 
+          <option>Secondary</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="firstName" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-10">
+        <input ngModel #invoiceDescription="ngModel" type="text" class="form-control" id="firstName" name="firstName"
+          placeholder="First Name" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.invoiceDescription" class="text-danger">
+          {{ formErrors.invoiceDescription }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-10">
+        <input ngModel #invoiceDescription="ngModel" type="text" class="form-control" id="lastName" name="lastName"
+          placeholder="Last Name" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.invoiceDescription" class="text-danger">
+          {{ formErrors.invoiceDescription }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input ngModel #invoiceDescription="ngModel" type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+          placeholder="Phone Number" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.invoiceDescription" class="text-danger">
+          {{ formErrors.invoiceDescription }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input ngModel #invoiceDescription="ngModel" type="text" class="form-control" id="email" name="email"
+          placeholder="Email" required minlength="2" maxlength="30">
+        <span *ngIf="formErrors.invoiceDescription" class="text-danger">
+          {{ formErrors.invoiceDescription }}
+        </span>
+      </div>
+    </div>
+  </form>
+
+  <a class="btn btn-primary" routerLink="/contact">Submit</a>
+</section>
