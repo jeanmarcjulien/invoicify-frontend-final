@@ -117,7 +117,6 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__invoice_invoice_component__ = __webpack_require__("../../../../../src/app/invoice/invoice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__ = __webpack_require__("../../../../../src/app/contact-form/contact-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__email_form_email_form_component__ = __webpack_require__("../../../../../src/app/email-form/email-form.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -125,7 +124,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -173,8 +171,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21__invoice_form_invoice_form_component__["a" /* InvoiceFormComponent */],
             __WEBPACK_IMPORTED_MODULE_22__invoice_invoice_component__["a" /* InvoiceComponent */],
             __WEBPACK_IMPORTED_MODULE_23__contact_contact_component__["a" /* ContactComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__["a" /* ContactFormComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__email_form_email_form_component__["a" /* EmailFormComponent */]
+            __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__["a" /* ContactFormComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -524,7 +521,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/company-form/company-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li><a routerLink=\"/company\">Companies</a></li>\r\n      <li class=\"active\">Manage Company</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company\">Return to Companies</a>\r\n\r\n  <h1>Manage Companies</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form novalidate (ngSubmit)=\"saveCompany(companyForm)\"  #companyForm=\"ngForm\" class=\"form-horizontal\">\r\n    <input [ngModel]=\"company?.id\" ngModel #company_id=\"ngModel\" type=\"hidden\" name=\"id\">\r\n    <div class=\"form-group\">\r\n      <label for=\"name\" class=\"col-sm-2 control-label\">Company Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"company?.name\" ngModel #name=\"ngModel\" type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Company Name\" required minlength=\"2\" maxlength=\"30\">\r\n         <span *ngIf=\"formErrors.name\" class=\"text-danger\">\r\n          {{ formErrors.name }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n     <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]=\"!companyForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li><a routerLink=\"/company\">Companies</a></li>\r\n      <li class=\"active\">Manage Company</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company\">Return to Companies</a>\r\n\r\n  <h1>Manage Company</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form novalidate (ngSubmit)=\"saveCompany(companyForm)\"  #companyForm=\"ngForm\" class=\"form-horizontal\">\r\n    <input [ngModel]=\"company?.id\" ngModel #company_id=\"ngModel\" type=\"hidden\" name=\"id\">\r\n    <div class=\"form-group\">\r\n      <label for=\"name\" class=\"col-sm-2 control-label\">Company Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"company?.name\" ngModel #name=\"ngModel\" type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Company Name\" required minlength=\"2\" maxlength=\"30\">\r\n         <span *ngIf=\"formErrors.name\" class=\"text-danger\">\r\n          {{ formErrors.name }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n     <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]=\"!companyForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -751,7 +748,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact-form/contact-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contacts</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"contact\" name=\"Contact\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [ngValue]=\"company.id\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"contact\" name=\"Contact\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option>Primary</option> \r\n          <option>Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Submit</a>\r\n</section>"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contact</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"contact\" name=\"Contact\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [ngValue]=\"company.id\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"contact\" name=\"Contact\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option>Primary</option> \r\n          <option>Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #invoiceDescription=\"ngModel\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\">\r\n        <span *ngIf=\"formErrors.invoiceDescription\" class=\"text-danger\">\r\n          {{ formErrors.invoiceDescription }}\r\n        </span>\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Submit</a>\r\n</section>"
 
 /***/ }),
 
@@ -897,7 +894,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contact</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>1</td>\r\n        <td>Justin</td>\r\n        <td>Farkas</td>\r\n        <td><a class=\"email-link\" routerLink=\"/email\">Justin.Farkas@Ally.com</a></td>\r\n        <td>704-502-7466</td>\r\n        <td>Ally</td>\r\n        <td>DO NOT CONTACT</td>\r\n        <td>admin</td>\r\n        <td>not implemented yet</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>1</td>\r\n        <td>Justin</td>\r\n        <td>Farkas</td>\r\n        <td><a href=\"mailto:Justin.Farkas@Ally.com\">Justin.Farkas@Ally.com</a></td>\r\n        <td><a href=\"tel:705-502-7466\">704-502-7466</a></td>\r\n        <td>Ally</td>\r\n        <td>DO NOT CONTACT</td>\r\n        <td>admin</td>\r\n        <td>not implemented yet</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
@@ -1141,67 +1138,6 @@ DeleteConfirmComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/email-form/email-form.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/email-form/email-form.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  email-form works!\n</p>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/email-form/email-form.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmailFormComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var EmailFormComponent = (function () {
-    function EmailFormComponent() {
-    }
-    EmailFormComponent.prototype.ngOnInit = function () {
-    };
-    return EmailFormComponent;
-}());
-EmailFormComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
-        selector: 'app-email-form',
-        template: __webpack_require__("../../../../../src/app/email-form/email-form.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/email-form/email-form.component.css")]
-    }),
-    __metadata("design:paramtypes", [])
-], EmailFormComponent);
-
-//# sourceMappingURL=email-form.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/home/home.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1424,7 +1360,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/invoice/invoice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Manage Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Description</th>\r\n          <th>Client</th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
+module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Description</th>\r\n          <th>Client</th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
 
 /***/ }),
 
@@ -1580,7 +1516,6 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__invoice_invoice_component__ = __webpack_require__("../../../../../src/app/invoice/invoice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__ = __webpack_require__("../../../../../src/app/contact-form/contact-form.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_app_email_form_email_form_component__ = __webpack_require__("../../../../../src/app/email-form/email-form.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1588,7 +1523,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -1617,8 +1551,7 @@ var routes = [
     { path: 'invoice/add', component: __WEBPACK_IMPORTED_MODULE_10__invoice_form_invoice_form_component__["a" /* InvoiceFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
     { path: 'invoice', component: __WEBPACK_IMPORTED_MODULE_11__invoice_invoice_component__["a" /* InvoiceComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
     { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_12__contact_contact_component__["a" /* ContactComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
-    { path: 'contact/add', component: __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__["a" /* ContactFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
-    { path: 'email', component: __WEBPACK_IMPORTED_MODULE_14_app_email_form_email_form_component__["a" /* EmailFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] }
+    { path: 'contact/add', component: __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__["a" /* ContactFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
