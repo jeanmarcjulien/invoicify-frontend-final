@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
-
 import { DataService } from '../data.service'
 import { fadeInAnimation } from '../animations/fade-in.animation';
 
