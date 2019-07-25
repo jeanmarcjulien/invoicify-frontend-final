@@ -117,6 +117,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__invoice_invoice_component__ = __webpack_require__("../../../../../src/app/invoice/invoice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__ = __webpack_require__("../../../../../src/app/contact-form/contact-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__email_form_email_form_component__ = __webpack_require__("../../../../../src/app/email-form/email-form.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -124,6 +125,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -171,7 +173,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21__invoice_form_invoice_form_component__["a" /* InvoiceFormComponent */],
             __WEBPACK_IMPORTED_MODULE_22__invoice_invoice_component__["a" /* InvoiceComponent */],
             __WEBPACK_IMPORTED_MODULE_23__contact_contact_component__["a" /* ContactComponent */],
-            __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__["a" /* ContactFormComponent */]
+            __WEBPACK_IMPORTED_MODULE_24__contact_form_contact_form_component__["a" /* ContactFormComponent */],
+            __WEBPACK_IMPORTED_MODULE_25__email_form_email_form_component__["a" /* EmailFormComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -894,7 +897,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contact</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>1</td>\r\n        <td>Justin</td>\r\n        <td>Farkas</td>\r\n        <td><a class=\"email-link\" routerLink=\"/email\">Justin.Farkas@Ally.com</a></td>\r\n        <td>704-502-7466</td>\r\n        <td>Ally</td>\r\n        <td>DO NOT CONTACT</td>\r\n        <td>admin</td>\r\n        <td>not implemented yet</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
@@ -1138,6 +1141,67 @@ DeleteConfirmComponent = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/email-form/email-form.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/email-form/email-form.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  email-form works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/email-form/email-form.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmailFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var EmailFormComponent = (function () {
+    function EmailFormComponent() {
+    }
+    EmailFormComponent.prototype.ngOnInit = function () {
+    };
+    return EmailFormComponent;
+}());
+EmailFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
+        selector: 'app-email-form',
+        template: __webpack_require__("../../../../../src/app/email-form/email-form.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/email-form/email-form.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], EmailFormComponent);
+
+//# sourceMappingURL=email-form.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/home/home.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1159,7 +1223,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <div id=\"carousel-example-generic\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <!-- Indicators -->\r\n    <ol class=\"carousel-indicators\">\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li>\r\n    </ol>\r\n\r\n    <!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\" role=\"listbox\" height=\"500px\">\r\n      <div class=\"item active\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Some Tag Line</h3>\r\n          <p>Because tag lines</p>\r\n        </div>\r\n      </div>\r\n      <div class=\"item\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Marketing Mumbo Jumo</h3>\r\n          <p>Because marketing is awesome</p>\r\n        </div>\r\n      </div>\r\n      <div class=\"item\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Another Image</h3>\r\n          <p>Because that's the point</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Controls -->\r\n    <a class=\"left carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n\r\n\r\n      <!-- START THE FEATURETTES -->\r\n\r\n      <hr>\r\n\r\n      <div class=\"row featurette\">\r\n        <div class=\"col-md-7\">\r\n          <h2 class=\"featurette-heading\">First featurette heading. <span class=\"text-muted\">It'll blow your mind.</span></h2>\r\n          <p class=\"lead\">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>\r\n        </div>\r\n        <div class=\"col-md-5\">\r\n          <img src=\"http://gatewaysat.com/wp-content/uploads/2015/02/college-icon-300x300.png\" alt=\"Generic placeholder image\">\r\n        </div>\r\n      </div>\r\n\r\n      <hr>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-md-7 col-md-push-5\">\r\n          <h2 class=\"featurette-heading\">Oh yeah, it's that good. <span class=\"text-muted\">See for yourself.</span></h2>\r\n          <p class=\"lead\">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>\r\n        </div>\r\n        <div class=\"col-md-5 col-md-pull-7\">\r\n          <img src=\"https://www.collegeraptor.com/wp/wp-content/uploads/2016/07/Minors-300x300.png\" alt=\"Generic placeholder image\">\r\n        </div>\r\n      </div>\r\n\r\n      <hr>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-md-7\">\r\n          <h2 class=\"featurette-heading\">And lastly, this one. <span class=\"text-muted\">Checkmate.</span></h2>\r\n          <p class=\"lead\">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>\r\n        </div>\r\n        <div class=\"col-md-5\">\r\n          <img src=\"http://knavigators.com/wp-content/uploads/2016/07/college_admissions_counseling_qa-300x300.jpg\" alt=\"Generic placeholder image\">\r\n        </div>\r\n      </div>\r\n\r\n      <!-- /END THE FEATURETTES -->\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <div id=\"carousel-example-generic\" class=\"carousel slide\" data-ride=\"carousel\">\r\n    <!-- Indicators -->\r\n    <ol class=\"carousel-indicators\">\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\r\n      <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li>\r\n    </ol>\r\n\r\n    <!-- Wrapper for slides -->\r\n    <div class=\"carousel-inner\" role=\"listbox\" height=\"500px\">\r\n      <div class=\"item active\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>Just Phresh</h3>\r\n          <p>A Team Of Dreamers</p>\r\n        </div>\r\n      </div>\r\n      <div class=\"item\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3></h3>\r\n          <p></p>\r\n        </div>\r\n      </div>\r\n      <div class=\"item\">\r\n        <img src=\"https://www.ally.com/resources/pres/micro-sites/dealer-brand/images/leadership/hero_image_1152.jpg\">\r\n        <div class=\"carousel-caption\">\r\n          <h3></h3>\r\n          <p></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Controls -->\r\n    <a class=\"left carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"prev\">\r\n      <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Previous</span>\r\n    </a>\r\n    <a class=\"right carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"next\">\r\n      <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\r\n      <span class=\"sr-only\">Next</span>\r\n    </a>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1516,6 +1580,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__invoice_invoice_component__ = __webpack_require__("../../../../../src/app/invoice/invoice.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__contact_contact_component__ = __webpack_require__("../../../../../src/app/contact/contact.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__ = __webpack_require__("../../../../../src/app/contact-form/contact-form.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_app_email_form_email_form_component__ = __webpack_require__("../../../../../src/app/email-form/email-form.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1523,6 +1588,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1551,7 +1617,8 @@ var routes = [
     { path: 'invoice/add', component: __WEBPACK_IMPORTED_MODULE_10__invoice_form_invoice_form_component__["a" /* InvoiceFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
     { path: 'invoice', component: __WEBPACK_IMPORTED_MODULE_11__invoice_invoice_component__["a" /* InvoiceComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
     { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_12__contact_contact_component__["a" /* ContactComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
-    { path: 'contact/add', component: __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__["a" /* ContactFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] }
+    { path: 'contact/add', component: __WEBPACK_IMPORTED_MODULE_13__contact_form_contact_form_component__["a" /* ContactFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] },
+    { path: 'email', component: __WEBPACK_IMPORTED_MODULE_14_app_email_form_email_form_component__["a" /* EmailFormComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_2__auth_guard_service__["a" /* AuthGuard */]] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
