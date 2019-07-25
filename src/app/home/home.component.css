@@ -1,0 +1,17 @@
+h3{
+    color: black;
+}
+p{
+    color: black;
+}
+img { 
+	max-width: 100%;
+	}
+img.thumbnail { 
+	width: 100px;
+	height: 70px;
+    }
+.carousel-inner > .item > img { 
+    width: 750px;
+    height: 500px;
+}
