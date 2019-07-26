@@ -25,16 +25,16 @@
         </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Justin</td>
-        <td>Farkas</td>
-        <td><a href="mailto:Justin.Farkas@Ally.com">Justin.Farkas@Ally.com</a></td>
-        <td>704-502-7466</td>
-        <td>Ally</td>
-        <td>DO NOT CONTACT</td>
-        <td>admin</td>
-        <td>not implemented yet</td>
+      <tr *ngFor="let contact of contacts">
+        <td>{{contact.id}}</td>
+        <td>{{contact.firstName}}</td>
+        <td>{{contact.lastName}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.phoneNumber}}</td>
+        <td>{{contact.client.name}}</td>
+        <td>{{contact.type}}</td>
+        <td>{{contact.user.username}}</td>
+        <td>not yet implemented</td>
       </tr>
     </tbody>
   </table>

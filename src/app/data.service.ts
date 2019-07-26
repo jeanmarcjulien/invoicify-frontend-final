@@ -11,7 +11,7 @@ import 'rxjs/add/observable/empty';
 @Injectable()
 export class DataService {
 
-    private baseUrl = 'http://localhost:8080/api/'
+    private baseUrl = 'https://morning-hollows-64649.herokuapp.com/api/'
 
     found = false;
 

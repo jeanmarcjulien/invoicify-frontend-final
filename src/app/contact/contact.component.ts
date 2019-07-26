@@ -18,7 +18,7 @@ export class ContactComponent implements OnInit {
 
   constructor(private dataService: DataService, public dialog: MatDialog) {}
 
-  ngOnInit() { /*this.getContacts();*/ }
+  ngOnInit() { this.getContacts(); }
   
   getContacts() {
     this.dataService.getRecords("contact")
