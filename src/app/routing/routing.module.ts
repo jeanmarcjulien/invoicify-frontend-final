@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'invoice/add', component: InvoiceFormComponent, canActivate: [AuthGuard] },
   { path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
-  { path: 'contact/add', component: ContactFormComponent, canActivate: [AuthGuard] }
+  { path: 'contact/add', component: ContactFormComponent, canActivate: [AuthGuard] },
+  { path: 'contact/edit/:id', component: ContactFormComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

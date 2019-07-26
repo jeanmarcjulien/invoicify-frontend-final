@@ -34,7 +34,10 @@
         <td>{{contact.client.name}}</td>
         <td>{{contact.type}}</td>
         <td>{{contact.user.username}}</td>
-        <td>not yet implemented</td>
+        <td class="text-center">
+          <a class="btn btn-primary" [routerLink]="['/contact/edit/', contact.id]">Edit</a>&nbsp;
+          <button (click)="deleteContact(contact.id)" class="btn btn-danger">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
