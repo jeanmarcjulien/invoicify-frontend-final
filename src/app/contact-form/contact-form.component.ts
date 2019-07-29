@@ -53,7 +53,7 @@ export class ContactFormComponent implements OnInit {
     if(typeof contactForm.value.id === "number"){
       this.dataService.editRecord("contact", contactForm.value, contactForm.value.id)
           .subscribe(
-            company => this.successMessage = "Record updated successfully",
+            contact => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
     }else{
       this.dataService.addRecord("contact", contactForm.value)
