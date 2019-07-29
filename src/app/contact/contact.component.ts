@@ -27,6 +27,39 @@ export class ContactComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  idSort(contacts: any) {
+    contacts.sort(function(a,b) {
+      return a.id - b.id;
+    })
+  }
+
+  firstNameSort(contacts: any){
+    contacts.sort(function(a,b) {
+      let nameA = a.firstName.toLowerCase(), nameB = b.firstName.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  }
+
+  lastNameSort(contacts: any){
+    contacts.sort(function(a,b) {
+      let nameA = a.lastName.toLowerCase(), nameB = b.lastName.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  }
+
+  companySort(contacts: any){
+    contacts.sort(function(a,b) {
+      let nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  }  
+
   deleteContact(id:number) {
     let dialogRef = this.dialog.open(DeleteConfirmComponent);
 
