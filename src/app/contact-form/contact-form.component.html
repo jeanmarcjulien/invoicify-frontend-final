@@ -60,7 +60,7 @@
       <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
       <div class="col-sm-10">
         <input ngModel #phoneNumber="ngModel" type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-          placeholder="Phone Number" required minlength="10" maxlength="10">
+          placeholder="Phone Number" required minlength="10" maxlength="10" pattern="\d{3}-\d{3}-\d{4}">
           <span *ngIf="formErrors.phoneNumber" class="text-danger">
             {{ formErrors.phoneNumber }}
           </span>
