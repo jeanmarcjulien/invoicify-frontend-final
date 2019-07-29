@@ -16,10 +16,10 @@
           <th>ID</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Email</th>
-          <th>Phone Number</th>
           <th>Company</th>
           <th>Type</th>
+          <th>Email</th>
+          <th>Phone Number</th>
           <th>Added By</th>
           <th>Action</th>
         </tr>
@@ -29,10 +29,11 @@
         <td>{{contact.id}}</td>
         <td>{{contact.firstName}}</td>
         <td>{{contact.lastName}}</td>
-        <td>{{contact.email}}</td>
-        <td>{{contact.phoneNumber}}</td>
         <td>{{contact.client.name}}</td>
         <td>{{contact.type}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.phoneNumber}}</td>
+       
         <td>{{contact.user.username}}</td>
         <td class="text-center">
           <a class="btn btn-primary" [routerLink]="['/contact/edit/', contact.id]">Edit</a>&nbsp;
