@@ -49,11 +49,12 @@ export class ContactFormComponent implements OnInit {
       error =>  this.errorMessage = <any>error);
   }
 
+
   saveContact(contactForm: NgForm){
     if(typeof contactForm.value.id === "number"){
       this.dataService.editRecord("contact", contactForm.value, contactForm.value.id)
           .subscribe(
-            company => this.successMessage = "Record updated successfully",
+            contact => this.successMessage = "Record updated successfully",
             error =>  this.errorMessage = <any>error);
     }else{
       this.dataService.addRecord("contact", contactForm.value)
@@ -97,14 +98,32 @@ export class ContactFormComponent implements OnInit {
   }
 
   formErrors = {
-    'first_name': ''
+    'firstName': '',
+    'lastName': '',
+    'phoneNumber': '',
+    'email': ''
   };
 
   validationMessages = {
-    'first_name': {
+    'firstName': {
       'required': 'First name is required.',
       'minlength': 'First name must be at least 2 characters long.',
       'maxlength': 'First name cannot be more than 30 characters long.'
+    },
+    'lastName':{
+      'required': 'Last name is required.',
+      'minlength': 'Last name must be at least 2 characters long.',
+      'maxlength': 'Last name cannot be more than 30 characters long.'
+    },
+    'phoneNumber':{
+      'required': 'Phone number is required.',
+      'minlength': 'Phone number must be 10 digits long.',
+      'maxlength': 'Phone number must be 10 digits long.'
+    },
+    'email':{
+      'required': 'Email is required.',
+      'minlength': 'Email must be at least 2 characters long.',
+      'maxlength': 'Email cannot be more than 30 characters long.'
     }
   };
 }
