@@ -748,7 +748,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact-form/contact-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contact</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"client\" name=\"client\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [ngValue]=\"company\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"type\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #type=\"ngModel\" class=\"form-control\" id=\"type\" name=\"type\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option>Primary</option> \r\n          <option>Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #firstName=\"ngModel\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.firstName\" class=\"text-danger\">\r\n            {{ formErrors.firstName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #lastName=\"ngModel\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.lastName\" class=\"text-danger\">\r\n            {{ formErrors.lastName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #phoneNumber=\"ngModel\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.phoneNumber\" class=\"text-danger\">\r\n            {{ formErrors.phoneNumber }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #email=\"ngModel\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.email\" class=\"text-danger\">\r\n            {{ formErrors.email }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]= \"!contactForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contact</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #contact=\"ngModel\" class=\"form-control\" id=\"client\" name=\"client\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [ngValue]=\"company\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"type\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"null\" ngModel #type=\"ngModel\" class=\"form-control\" id=\"type\" name=\"type\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option>Primary</option> \r\n          <option>Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #firstName=\"ngModel\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.firstName\" class=\"text-danger\">\r\n            {{ formErrors.firstName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #lastName=\"ngModel\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.lastName\" class=\"text-danger\">\r\n            {{ formErrors.lastName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #phoneNumber=\"ngModel\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"10\" maxlength=\"10\">\r\n          <span *ngIf=\"formErrors.phoneNumber\" class=\"text-danger\">\r\n            {{ formErrors.phoneNumber }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input ngModel #email=\"ngModel\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.email\" class=\"text-danger\">\r\n            {{ formErrors.email }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]= \"!contactForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>"
 
 /***/ }),
 
@@ -787,13 +787,31 @@ var ContactFormComponent = (function () {
         this.route = route;
         this.location = location;
         this.formErrors = {
-            'first_name': ''
+            'firstName': '',
+            'lastName': '',
+            'phoneNumber': '',
+            'email': ''
         };
         this.validationMessages = {
-            'first_name': {
+            'firstName': {
                 'required': 'First name is required.',
                 'minlength': 'First name must be at least 2 characters long.',
                 'maxlength': 'First name cannot be more than 30 characters long.'
+            },
+            'lastName': {
+                'required': 'Last name is required.',
+                'minlength': 'Last name must be at least 2 characters long.',
+                'maxlength': 'Last name cannot be more than 30 characters long.'
+            },
+            'phoneNumber': {
+                'required': 'Phone number is required.',
+                'minlength': 'Phone number must be 10 digits long.',
+                'maxlength': 'Phone number must be 10 digits long.'
+            },
+            'email': {
+                'required': 'Email is required.',
+                'minlength': 'Email must be at least 2 characters long.',
+                'maxlength': 'Email cannot be more than 30 characters long.'
             }
         };
     }
@@ -820,7 +838,7 @@ var ContactFormComponent = (function () {
         var _this = this;
         if (typeof contactForm.value.id === "number") {
             this.dataService.editRecord("contact", contactForm.value, contactForm.value.id)
-                .subscribe(function (company) { return _this.successMessage = "Record updated successfully"; }, function (error) { return _this.errorMessage = error; });
+                .subscribe(function (contact) { return _this.successMessage = "Record updated successfully"; }, function (error) { return _this.errorMessage = error; });
         }
         else {
             this.dataService.addRecord("contact", contactForm.value)
