@@ -21,7 +21,8 @@ export class ContactFormComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   companies: any[];
-  contact: object;
+  contact: any;
+  company: any
 
   constructor(
     private dataService: DataService,
@@ -32,7 +33,9 @@ export class ContactFormComponent implements OnInit {
   getRecordForEdit(){
     this.route.params
       .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
-      .subscribe(contact => this.contact = contact);
+      .subscribe(
+        contact => this.contact = contact
+      );
   }
 
   ngOnInit() {
