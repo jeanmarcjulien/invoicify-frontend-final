@@ -30,17 +30,18 @@ export class ContactFormComponent implements OnInit {
   ) { }
 
   getRecordForEdit(){
-    this.route.params
-      .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
-      .subscribe(contact => this.contact = contact);
+    this.dataService.getRecord('contact', this.route.snapshot.params['id'])
+      .subscribe( contact => this.contact = contact)
+    // this.route.params
+    //   .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
+    //   .subscribe(contact => {
+    //     this.contact = contact
+    //   });
   }
 
   ngOnInit() {
-    this.route.params
-      .subscribe((params: Params) => {
-        (+params['id']) ? this.getRecordForEdit() : null;
-      });
-      this.getCompanies();
+    this.getCompanies();
+    this.getRecordForEdit();
   }
   getCompanies(){
     this.dataService.getRecords("company")
@@ -50,6 +51,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   saveContact(contactForm: NgForm){
+    console.log(contactForm.value, " ---------------------- ")
     if(typeof contactForm.value.id === "number"){
       this.dataService.editRecord("contact", contactForm.value, contactForm.value.id)
           .subscribe(
