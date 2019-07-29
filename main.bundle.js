@@ -881,7 +881,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "td {\r\n    white-space: nowrap;\r\n}", ""]);
 
 // exports
 
@@ -894,7 +894,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.email}}</td>\r\n        <td>{{contact.phoneNumber}}</td>\r\n        <td>{{contact.client.name}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td>{{contact.phoneNumber}}</td>\r\n        <td>{{contact.client.name}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
