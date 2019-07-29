@@ -13,13 +13,13 @@
   <table class="table table-striped table-bordered" id="dataTable" style="width:100%">
     <thead>
         <tr>
-          <th>ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>ID <button (click)="idSort(contacts)" class="sort">&#x2195;</button></th>
+          <th>First Name<button (click)="firstNameSort(contacts)" class="sort">&#x2195;</button></th>
+          <th>Last Name<button (click)="lastNameSort(contacts)" class="sort">&#x2195;</button></th>
+          <th>Company<button (click)="companySort(contacts)" class="sort">&#x2195;</button></th>
+          <th>Type</th>
           <th>Email</th>
           <th>Phone Number</th>
-          <th>Company</th>
-          <th>Type</th>
           <th>Added By</th>
           <th>Action</th>
         </tr>
@@ -29,10 +29,10 @@
         <td>{{contact.id}}</td>
         <td>{{contact.firstName}}</td>
         <td>{{contact.lastName}}</td>
-        <td><a href="mailto:{{contact.email}}">{{contact.email}}</a></td>
-        <td>{{contact.phoneNumber}}</td>
         <td>{{contact.client.name}}</td>
         <td>{{contact.type}}</td>
+        <td><a href="mailto:{{contact.email}}">{{contact.email}}</a></td>
+        <td>{{contact.phoneNumber}}</td>
         <td>{{contact.user.username}}</td>
         <td class="text-center">
           <a class="btn btn-primary" [routerLink]="['/contact/edit/', contact.id]">Edit</a>&nbsp;
