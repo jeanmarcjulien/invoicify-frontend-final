@@ -881,7 +881,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "td {\r\n    white-space: nowrap;\r\n}", ""]);
+exports.push([module.i, "th{\r\n  white-space: nowrap;\r\n  text-align: center;\r\n}\r\n.sort {\r\n  border: none;\r\n  padding: 10;\r\n  background: none;\r\n}\r\ntd {\r\n    white-space: nowrap;\r\n}", ""]);
 
 // exports
 
@@ -894,7 +894,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>First Name</th>\r\n          <th>Last Name</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Company</th>\r\n          <th>Type</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td>{{contact.phoneNumber}}</td>\r\n        <td>{{contact.client.name}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>First Name<button (click)=\"firstNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Last Name<button (click)=\"lastNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Company<button (click)=\"companySort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Type</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.client.name}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td>{{contact.email}}</td>\r\n        <td>{{contact.phoneNumber}}</td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
@@ -932,6 +932,41 @@ var ContactComponent = (function () {
         var _this = this;
         this.dataService.getRecords("contact")
             .subscribe(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactComponent.prototype.idSort = function (contacts) {
+        contacts.sort(function (a, b) {
+            return a.id - b.id;
+        });
+    };
+    ContactComponent.prototype.firstNameSort = function (contacts) {
+        contacts.sort(function (a, b) {
+            var nameA = a.firstName.toLowerCase(), nameB = b.firstName.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
+    };
+    ContactComponent.prototype.lastNameSort = function (contacts) {
+        contacts.sort(function (a, b) {
+            var nameA = a.lastName.toLowerCase(), nameB = b.lastName.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
+    };
+    ContactComponent.prototype.companySort = function (contacts) {
+        contacts.sort(function (a, b) {
+            var nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
     };
     ContactComponent.prototype.deleteContact = function (id) {
         var _this = this;
