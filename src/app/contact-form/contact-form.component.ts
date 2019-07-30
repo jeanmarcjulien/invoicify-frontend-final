@@ -121,12 +121,14 @@ export class ContactFormComponent implements OnInit {
     'phoneNumber':{
       'required': 'Phone number is required.',
       'minlength': 'Phone number must be 10 digits long.',
-      'maxlength': 'Phone number must be 10 digits long.'
+      'maxlength': 'Phone number must be 10 digits long.',
+      'pattern': 'Phone number must be seperated by -.'
     },
     'email':{
       'required': 'Email is required.',
       'minlength': 'Email must be at least 2 characters long.',
-      'maxlength': 'Email cannot be more than 30 characters long.'
+      'maxlength': 'Email cannot be more than 30 characters long.',
+      'pattern': 'Must be a valid email.'
     }
   };
 }
