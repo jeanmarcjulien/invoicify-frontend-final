@@ -11,8 +11,8 @@
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
-  <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm" class="form-horizontal">
-    <input [ngModel]="contact?.id" ngModel #userId="ngModel" type="hidden" name="id">
+  <form novalidte (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm" class="form-horizontal">
+    <input [ngModel]="contact?.id" type="hidden" name="id">
     <div class="form-group">
       <label for="client" class="col-sm-2 control-label">Company</label>
       <div class="col-sm-10">
