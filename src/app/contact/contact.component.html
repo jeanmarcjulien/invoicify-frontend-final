@@ -32,7 +32,7 @@
         <td>{{contact.client}}</td>
         <td>{{contact.type}}</td>
         <td><a href="mailto:{{contact.email}}">{{contact.email}}</a></td>
-        <td>{{contact.phoneNumber}}</td>
+        <td><a [href]="setSkypeNumber(contact.phoneNumber)">{{contact.phoneNumber}}</a></td>
         <td>{{contact.user.username}}</td>
         <td class="text-center">
           <a class="btn btn-primary" [routerLink]="['/contact/edit/', contact.id]">Edit</a>&nbsp;
