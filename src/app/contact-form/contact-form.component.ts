@@ -21,7 +21,8 @@ export class ContactFormComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   companies: any[];
-  contact: object;
+  contact: any;
+  company: any
 
   constructor(
     private dataService: DataService,
@@ -32,7 +33,9 @@ export class ContactFormComponent implements OnInit {
   getRecordForEdit(){
     this.route.params
       .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
-      .subscribe(contact => this.contact = contact);
+      .subscribe(
+        contact => this.contact = contact
+      );
   }
 
   ngOnInit() {
@@ -118,12 +121,14 @@ export class ContactFormComponent implements OnInit {
     'phoneNumber':{
       'required': 'Phone number is required.',
       'minlength': 'Phone number must be 10 digits long.',
-      'maxlength': 'Phone number must be 10 digits long.'
+      'maxlength': 'Phone number must be 10 digits long.',
+      'pattern': 'Phone number must be seperated by -.'
     },
     'email':{
       'required': 'Email is required.',
       'minlength': 'Email must be at least 2 characters long.',
-      'maxlength': 'Email cannot be more than 30 characters long.'
+      'maxlength': 'Email cannot be more than 30 characters long.',
+      'pattern': 'Must be a valid email.'
     }
   };
 }
