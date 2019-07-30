@@ -26,4 +26,29 @@ export class InvoiceComponent implements OnInit {
         results => this.invoices = results,
         error =>  this.errorMessage = <any>error);
   }
+
+  idSort(invoices: any) {
+    invoices.sort(function(a,b) {
+      return a.id - b.id;
+    })
+  }
+
+  descSort(invoices: any){
+    invoices.sort(function(a,b) {
+      let nameA = a.invoiceDescription.toLowerCase(), nameB = b.invoiceDescription.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  }
+
+  clientSort(invoices: any){
+    invoices.sort(function(a,b) {
+      let nameA = a.company.name.toLowerCase(), nameB = b.company.name.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  } 
+
 }

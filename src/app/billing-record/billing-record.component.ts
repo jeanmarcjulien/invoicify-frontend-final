@@ -28,4 +28,27 @@ export class BillingRecordComponent implements OnInit {
         error =>  this.errorMessage = <any>error);
   }
 
+  idSort(billingRecords: any) {
+    billingRecords.sort(function(a,b) {
+      return a.id - b.id;
+    })
+  }
+
+  descSort(billingRecords: any){
+    billingRecords.sort(function(a,b) {
+      let nameA = a.description.toLowerCase(), nameB = b.description.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  }
+
+  clientSort(billingRecords: any){
+    billingRecords.sort(function(a,b) {
+      let nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+      if(nameA < nameB) return -1;
+      if(nameA > nameB) return 1;
+      return 0;
+    })
+  } 
 }
