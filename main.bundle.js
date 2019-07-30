@@ -433,7 +433,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "th{\r\n    white-space: nowrap;\r\n    text-align: center;\r\n  }\r\n  .sort {\r\n    border: none;\r\n    padding: 10;\r\n    background: none;\r\n  }\r\n  td {\r\n      white-space: nowrap;\r\n  }", ""]);
 
 // exports
 
@@ -446,7 +446,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/billing-record/billing-record.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Billing Records</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Billing Records</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/billing-record/add\">Add Billing Record</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Description</th>\r\n        <th>Client</th>\r\n        <th>Type</th>\r\n        <th>Created By</th>\r\n        <th>Total</th>\r\n        <!-- <th>Admin</th> -->\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let billingRecord of billingRecords\">\r\n        <td>{{billingRecord.id}}</td>\r\n        <td>{{billingRecord.description}}</td>\r\n        <td>{{billingRecord.client.name}}</td>\r\n        <td>{{(billingRecord.rate && billingRecord.quantity) ? \"Rate Based\" : \"Flat Fee\"}}</td>\r\n        <td>{{billingRecord.createdBy.username}}</td>\r\n        <td>{{billingRecord.total}}</td>\r\n        <!-- <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/billing-record/edit/', billingRecord.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteBillingRecord(billingRecord.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td> -->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Billing Records</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Billing Records</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/billing-record/add\">Add Billing Record</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Description <button (click)=\"descSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Client <button (click)=\"clientSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Type</th>\r\n        <th>Created By</th>\r\n        <th>Total</th>\r\n        <!-- <th>Admin</th> -->\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let billingRecord of billingRecords\">\r\n        <td>{{billingRecord.id}}</td>\r\n        <td>{{billingRecord.description}}</td>\r\n        <td>{{billingRecord.client.name}}</td>\r\n        <td>{{(billingRecord.rate && billingRecord.quantity) ? \"Rate Based\" : \"Flat Fee\"}}</td>\r\n        <td>{{billingRecord.createdBy.username}}</td>\r\n        <td>{{billingRecord.total}}</td>\r\n        <!-- <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/billing-record/edit/', billingRecord.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteBillingRecord(billingRecord.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td> -->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -482,6 +482,31 @@ var BillingRecordComponent = (function () {
         var _this = this;
         this.dataService.getRecords("billing-record")
             .subscribe(function (results) { return _this.billingRecords = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    BillingRecordComponent.prototype.idSort = function (billingRecords) {
+        billingRecords.sort(function (a, b) {
+            return a.id - b.id;
+        });
+    };
+    BillingRecordComponent.prototype.descSort = function (billingRecords) {
+        billingRecords.sort(function (a, b) {
+            var nameA = a.description.toLowerCase(), nameB = b.description.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
+    };
+    BillingRecordComponent.prototype.clientSort = function (billingRecords) {
+        billingRecords.sort(function (a, b) {
+            var nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
     };
     return BillingRecordComponent;
 }());
@@ -648,7 +673,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "th{\r\n    white-space: nowrap;\r\n    text-align: center;\r\n  }\r\n  .sort {\r\n    border: none;\r\n    padding: 10;\r\n    background: none;\r\n  }\r\n  td {\r\n      white-space: nowrap;\r\n  }", ""]);
 
 // exports
 
@@ -661,7 +686,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/company/company.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Companies</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Companies</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company/add\">Add Company</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let company of companies\">\r\n        <td>{{company.id}}</td>\r\n        <td>{{company.name}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/company/edit/', company.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteCompany(company.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Companies</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Companies</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company/add\">Add Company</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Name <button (click)=\"companySort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let company of companies\">\r\n        <td>{{company.id}}</td>\r\n        <td>{{company.name}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/company/edit/', company.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteCompany(company.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -710,6 +735,21 @@ var CompanyComponent = (function () {
             }
         });
     };
+    CompanyComponent.prototype.idSort = function (companies) {
+        companies.sort(function (a, b) {
+            return a.id - b.id;
+        });
+    };
+    CompanyComponent.prototype.companySort = function (companies) {
+        companies.sort(function (a, b) {
+            var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
+    };
     return CompanyComponent;
 }());
 CompanyComponent = __decorate([
@@ -748,7 +788,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact-form/contact-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contact</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <input [ngModel]=\"contact?.id\" ngModel #userId=\"ngModel\" type=\"hidden\" name=\"id\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"contact?.client\" class=\"form-control\" id=\"client\" name=\"client\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [value]=\"company.name\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"type\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"contact?.type\" class=\"form-control\" id=\"type\" name=\"type\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option value=\"Primary\">Primary</option> \r\n          <option value=\"Secondary\">Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.firstName\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.firstName\" class=\"text-danger\">\r\n            {{ formErrors.firstName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.lastName\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.lastName\" class=\"text-danger\">\r\n            {{ formErrors.lastName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.phoneNumber\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"10\" maxlength=\"12\" pattern=\"\\d{3}-\\d{3}-\\d{4}\">\r\n          <span *ngIf=\"formErrors.phoneNumber\" class=\"text-danger\">\r\n            {{ formErrors.phoneNumber }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.email\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\" pattern=\"[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-zA-Z]{2,4}$\">\r\n          <span *ngIf=\"formErrors.email\" class=\"text-danger\">\r\n            {{ formErrors.email }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]= \"!contactForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n    <li><a routerLink=\"/home\">Home</a></li>\r\n    <li><a routerLink=\"/contact\">Contacts</a></li>\r\n    <li class=\"active\">Manage Contact</li>\r\n  </ol>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact\">Return to Contacts</a>\r\n\r\n  <h1>Manage Contact</h1>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <form novalidte (ngSubmit)=\"saveContact(contactForm)\" #contactForm=\"ngForm\" class=\"form-horizontal\">\r\n    <input [ngModel]=\"contact?.id\" type=\"hidden\" name=\"id\">\r\n    <div class=\"form-group\">\r\n      <label for=\"client\" class=\"col-sm-2 control-label\">Company</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"contact?.client\" class=\"form-control\" id=\"client\" name=\"client\">\r\n          <option [ngValue]=\"null\">-- Select Company --</option>\r\n          <option *ngFor=\"let company of companies\" [value]=\"company.name\">\r\n            {{ company.name }}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"type\" class=\"col-sm-2 control-label\">Type</label>\r\n      <div class=\"col-sm-10\">\r\n        <select required [ngModel]=\"contact?.type\" class=\"form-control\" id=\"type\" name=\"type\">\r\n          <option [ngValue]=\"null\">-- Select Type --</option>\r\n          <option value=\"Primary\">Primary</option> \r\n          <option value=\"Secondary\">Secondary</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\" class=\"col-sm-2 control-label\">First Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.firstName\" type=\"text\" class=\"form-control\" id=\"firstName\" name=\"firstName\"\r\n          placeholder=\"First Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.firstName\" class=\"text-danger\">\r\n            {{ formErrors.firstName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"lastName\" class=\"col-sm-2 control-label\">Last Name</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.lastName\" type=\"text\" class=\"form-control\" id=\"lastName\" name=\"lastName\"\r\n          placeholder=\"Last Name\" required minlength=\"2\" maxlength=\"30\">\r\n          <span *ngIf=\"formErrors.lastName\" class=\"text-danger\">\r\n            {{ formErrors.lastName }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"phoneNumber\" class=\"col-sm-2 control-label\">Phone Number</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.phoneNumber\" type=\"text\" class=\"form-control\" id=\"phoneNumber\" name=\"phoneNumber\"\r\n          placeholder=\"Phone Number\" required minlength=\"10\" maxlength=\"12\" pattern=\"\\d{3}-\\d{3}-\\d{4}\">\r\n          <span *ngIf=\"formErrors.phoneNumber\" class=\"text-danger\">\r\n            {{ formErrors.phoneNumber }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n      <div class=\"col-sm-10\">\r\n        <input [ngModel]=\"contact?.email\" type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"\r\n          placeholder=\"Email\" required minlength=\"2\" maxlength=\"30\" pattern=\"[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-zA-Z]{2,4}$\">\r\n          <span *ngIf=\"formErrors.email\" class=\"text-danger\">\r\n            {{ formErrors.email }}\r\n          </span>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button [disabled]= \"!contactForm.form.valid\" type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</section>"
 
 /***/ }),
 
@@ -824,12 +864,8 @@ var ContactFormComponent = (function () {
             .subscribe(function (contact) { return _this.contact = contact; });
     };
     ContactFormComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params
-            .subscribe(function (params) {
-            (+params['id']) ? _this.getRecordForEdit() : null;
-        });
         this.getCompanies();
+        this.getRecordForEdit();
     };
     ContactFormComponent.prototype.getCompanies = function () {
         var _this = this;
@@ -838,6 +874,7 @@ var ContactFormComponent = (function () {
     };
     ContactFormComponent.prototype.saveContact = function (contactForm) {
         var _this = this;
+        console.log(contactForm.value, " ---------------------- ");
         if (typeof contactForm.value.id === "number") {
             this.dataService.editRecord("contact", contactForm.value, contactForm.value.id)
                 .subscribe(function (contact) { return _this.successMessage = "Record updated successfully"; }, function (error) { return _this.errorMessage = error; });
@@ -1402,7 +1439,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "th{\r\n    white-space: nowrap;\r\n    text-align: center;\r\n  }\r\n  .sort {\r\n    border: none;\r\n    padding: 10;\r\n    background: none;\r\n  }\r\n  td {\r\n      white-space: nowrap;\r\n  }", ""]);
 
 // exports
 
@@ -1415,7 +1452,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/invoice/invoice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Description</th>\r\n          <th>Client</th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
+module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Description <button (click)=\"descSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Client <button (click)=\"clientSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
 
 /***/ }),
 
@@ -1448,6 +1485,31 @@ var InvoiceComponent = (function () {
         var _this = this;
         this.dataService.getRecords("invoice")
             .subscribe(function (results) { return _this.invoices = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    InvoiceComponent.prototype.idSort = function (invoices) {
+        invoices.sort(function (a, b) {
+            return a.id - b.id;
+        });
+    };
+    InvoiceComponent.prototype.descSort = function (invoices) {
+        invoices.sort(function (a, b) {
+            var nameA = a.invoiceDescription.toLowerCase(), nameB = b.invoiceDescription.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
+    };
+    InvoiceComponent.prototype.clientSort = function (invoices) {
+        invoices.sort(function (a, b) {
+            var nameA = a.company.name.toLowerCase(), nameB = b.company.name.toLowerCase();
+            if (nameA < nameB)
+                return -1;
+            if (nameA > nameB)
+                return 1;
+            return 0;
+        });
     };
     return InvoiceComponent;
 }());
