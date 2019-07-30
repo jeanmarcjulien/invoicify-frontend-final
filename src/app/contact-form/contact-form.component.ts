@@ -21,7 +21,8 @@ export class ContactFormComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   companies: any[];
-  contact: object;
+  contact: any;
+  company: any
 
   constructor(
     private dataService: DataService,
@@ -30,13 +31,11 @@ export class ContactFormComponent implements OnInit {
   ) { }
 
   getRecordForEdit(){
-    this.dataService.getRecord('contact', this.route.snapshot.params['id'])
-      .subscribe( contact => this.contact = contact)
-    // this.route.params
-    //   .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
-    //   .subscribe(contact => {
-    //     this.contact = contact
-    //   });
+    this.route.params
+      .switchMap((params: Params) => this.dataService.getRecord("contact", +params['id']))
+      .subscribe(
+        contact => this.contact = contact
+      );
   }
 
   ngOnInit() {
@@ -49,6 +48,7 @@ export class ContactFormComponent implements OnInit {
       companies => this.companies = companies,
       error =>  this.errorMessage = <any>error);
   }
+
 
   saveContact(contactForm: NgForm){
     console.log(contactForm.value, " ---------------------- ")
@@ -99,14 +99,34 @@ export class ContactFormComponent implements OnInit {
   }
 
   formErrors = {
-    'first_name': ''
+    'firstName': '',
+    'lastName': '',
+    'phoneNumber': '',
+    'email': ''
   };
 
   validationMessages = {
-    'first_name': {
+    'firstName': {
       'required': 'First name is required.',
       'minlength': 'First name must be at least 2 characters long.',
       'maxlength': 'First name cannot be more than 30 characters long.'
+    },
+    'lastName':{
+      'required': 'Last name is required.',
+      'minlength': 'Last name must be at least 2 characters long.',
+      'maxlength': 'Last name cannot be more than 30 characters long.'
+    },
+    'phoneNumber':{
+      'required': 'Phone number is required.',
+      'minlength': 'Phone number must be 10 digits long.',
+      'maxlength': 'Phone number must be 10 digits long.',
+      'pattern': 'Phone number must be seperated by -.'
+    },
+    'email':{
+      'required': 'Email is required.',
+      'minlength': 'Email must be at least 2 characters long.',
+      'maxlength': 'Email cannot be more than 30 characters long.',
+      'pattern': 'Must be a valid email.'
     }
   };
 }
