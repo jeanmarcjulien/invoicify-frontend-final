@@ -3,6 +3,7 @@ import { fadeInAnimation } from 'app/animations/fade-in.animation';
 import { MatDialog } from '@angular/material';
 import { DataService } from 'app/data.service';
 import { DeleteConfirmComponent } from 'app/delete-confirm/delete-confirm.component';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -16,10 +17,14 @@ export class ContactComponent implements OnInit {
   successMessage: string;
   contacts: any[];
 
-  constructor(private dataService: DataService, public dialog: MatDialog) {}
+  constructor(private dataService: DataService, public dialog: MatDialog, private sanitizer:DomSanitizer) {}
 
   ngOnInit() { this.getContacts(); }
   
+  setSkypeNumber(n){
+    return this.sanitizer.bypassSecurityTrustUrl(`skype://+1${n}?call`);
+  }
+
   getContacts() {
     this.dataService.getRecords("contact")
       .subscribe(
