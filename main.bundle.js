@@ -951,7 +951,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\" >\r\n    <thead>\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>First Name<button (click)=\"firstNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Last Name<button (click)=\"lastNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Company<button (click)=\"companySort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Type</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.client}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td><a [href]=\"setSkypeNumber(contact.phoneNumber)\">{{contact.phoneNumber}}</a></td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Contacts</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\" >\r\n    <thead>\r\n\r\n        <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" >\r\n        <label for=\"search\">Search</label>\r\n\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>First Name<button (click)=\"firstNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Last Name<button (click)=\"lastNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Company<button (click)=\"companySort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Type</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.client}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td><a [href]=\"setSkypeNumber(contact.phoneNumber)\">{{contact.phoneNumber}}</a></td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
@@ -986,6 +986,8 @@ var ContactComponent = (function () {
         this.dataService = dataService;
         this.dialog = dialog;
         this.sanitizer = sanitizer;
+        this.searchText = '';
+        this.prevSearchText = '';
     }
     ContactComponent.prototype.ngOnInit = function () { this.getContacts(); };
     ContactComponent.prototype.setSkypeNumber = function (n) {
@@ -995,6 +997,16 @@ var ContactComponent = (function () {
         var _this = this;
         this.dataService.getRecords("contact")
             .subscribe(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+        this.dataService.getRecords("contact")
+            .subscribe(function (contacts) { return _this.originalContacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactComponent.prototype.onInput = function () {
+        var _this = this;
+        console.log(this.originalContacts);
+        console.log(this.searchText);
+        this.contacts = this.originalContacts.filter(function (c) { return c.firstName.includes(_this.searchText); });
+        console.log(this.searchText);
+        //console.log(filteredContacts);
     };
     ContactComponent.prototype.idSort = function (contacts) {
         contacts.sort(function (a, b) {
@@ -1043,6 +1055,12 @@ var ContactComponent = (function () {
     };
     return ContactComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* HostListener */])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ContactComponent.prototype, "onInput", null);
 ContactComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
         selector: 'app-contact',
