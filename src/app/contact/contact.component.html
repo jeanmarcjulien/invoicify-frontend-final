@@ -6,22 +6,26 @@
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
 
-  <h2>Contacts</h2>
-
-  <a class="btn btn-primary" routerLink="/contact/add">Add Contact</a>
-  
-  <div class="filterStuff">
-    <label for="filter">Filter By</label>
-    <select [(ngModel)]="filterBy" id="filter">
-        <option value="fName">First Name</option>
-        <option value="lName">Last Name</option>
-        <option value="companyName">Company Name</option>
-        <option value="type">Contact Type</option>
-        <option value="email">Email</option>
-        <option value="phoneNumber">Phone Number</option>
-    </select>
-    <br>
-    <input type="text" [(ngModel)]="searchText" id="search" placeholder="Search">
+  <div class="topStuff">
+    <div class="leftStuff">
+      <h2>Contacts</h2>
+      <a class="btn btn-primary" routerLink="/contact/add">Add Contact</a>
+    </div>
+    
+    <div class="filterStuff">
+      <div class="selectAndLabel">
+        <label for="filter">Filter By</label>
+        <select [(ngModel)]="filterBy" id="filter">
+            <option value="fName">First Name</option>
+            <option value="lName">Last Name</option>
+            <option value="companyName">Company Name</option>
+            <option value="type">Contact Type</option>
+            <option value="email">Email</option>
+            <option value="phoneNumber">Phone Number</option>
+        </select>
+      </div>
+      <input type="text" [(ngModel)]="searchText" id="search" placeholder="Search">
+    </div>
   </div>
     
 
