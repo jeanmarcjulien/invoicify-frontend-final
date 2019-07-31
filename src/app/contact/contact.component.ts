@@ -88,7 +88,7 @@ export class ContactComponent implements OnInit {
 
   companySort(contacts: any){
     contacts.sort(function(a,b) {
-      let nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+      let nameA = a.client.toLowerCase(), nameB = b.client.toLowerCase();
       if(nameA < nameB) return -1;
       if(nameA > nameB) return 1;
       return 0;
