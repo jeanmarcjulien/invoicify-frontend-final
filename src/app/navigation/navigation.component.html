@@ -24,7 +24,7 @@
                 <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-success">Login</button>
             </form>
             <div class="navbar-text navbar-right" *ngIf="authService.isAuthenticated()">
-                Signed in as: <a [routerLink]="['/user/edit/', auth_user.id]">{{auth_user.username}}</a> (<a class="logout" (click)="logout()">Logout</a>)
+                Signed in as: <a [routerLink]="['/user/edit/', auth_user.id]">{{auth_user.username}}</a> <button class="btn btn-info btn-xs" (click)="logout()">Logout</button>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
