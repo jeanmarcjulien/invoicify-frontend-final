@@ -14,3 +14,27 @@ table {
   margin-left:-15%;
   margin-top: 2%;
 }
+div.filterStuff {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-end;
+}
+div.selectAndLabel {
+  flex-direction:row;
+}
+div.topStuff {
+  display: flex;
+  justify-content: space-between;
+}
+div.rightStuff {
+  vertical-align: 1em;
+}
+h2 {
+  line-height: 0;
+  padding-bottom: 10px;
+}
+input#search{
+  width: 13.33em;
+}
+
