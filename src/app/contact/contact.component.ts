@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { fadeInAnimation } from 'app/animations/fade-in.animation';
 import { MatDialog } from '@angular/material';
 import { DataService } from 'app/data.service';
@@ -10,11 +10,15 @@ import { DeleteConfirmComponent } from 'app/delete-confirm/delete-confirm.compon
   styleUrls: ['./contact.component.css'],
   animations: [fadeInAnimation]
 })
+
 export class ContactComponent implements OnInit {
 
   errorMessage: string;
   successMessage: string;
   contacts: any[];
+  originalContacts: any[];
+  searchText: string = '';
+  prevSearchText: string = '';
 
   constructor(private dataService: DataService, public dialog: MatDialog) {}
 
@@ -25,6 +29,18 @@ export class ContactComponent implements OnInit {
       .subscribe(
         contacts => this.contacts = contacts,
         error => this.errorMessage = <any>error);
+    this.dataService.getRecords("contact")
+      .subscribe(
+        contacts => this.originalContacts = contacts,
+        error => this.errorMessage = <any>error);
+  }
+
+  @HostListener('input') onInput(){
+    console.log(this.originalContacts);
+      console.log(this.searchText);
+      this.contacts = this.originalContacts.filter(c=> c.firstName.includes(this.searchText));
+      console.log(this.searchText)
+      //console.log(filteredContacts);
   }
 
   idSort(contacts: any) {
