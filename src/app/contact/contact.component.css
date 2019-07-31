@@ -14,7 +14,12 @@ table {
   margin-left:-15%;
   margin-top: 2%;
 }
-select#filter {
-  margin-right:36%
+div.filterStuff {
+  position: absolute;
+  right: 31%;
+  margin-top: -3%;
+}
+input#search{
+  width: 13.33em;
 }
 
