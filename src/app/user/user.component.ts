@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DataService } from '../data.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
@@ -15,6 +15,9 @@ export class UserComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   users: any[];
+  originalUsers: any[];
+  searchText: string = '';
+  filterBy: string = '';
 
   constructor (private dataService: DataService, public dialog: MatDialog) {}
 
@@ -25,6 +28,16 @@ export class UserComponent implements OnInit {
       .subscribe(
         results => this.users = results,
         error =>  this.errorMessage = <any>error);
+    this.dataService.getRecords("user")
+        .subscribe(
+          results => this.originalUsers = results,
+          error =>  this.errorMessage = <any>error);
+  }
+
+  @HostListener('input') onInput(){
+    if(this.filterBy=='uname'){
+      this.users = this.originalUsers.filter(u=> u.username.toLowerCase().includes(this.searchText.toLowerCase()));
+    } 
   }
 
   deleteUser(id:number) {

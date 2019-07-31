@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { DataService } from '../data.service'
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
 import { fadeInAnimation } from '../animations/fade-in.animation';
+import {HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-company',
@@ -15,6 +16,9 @@ export class CompanyComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   companies: any[];
+  originalCompanies: any[];
+  searchText: string = '';
+  filterBy: string = '';
 
   constructor (private dataService: DataService, public dialog: MatDialog) {}
 
@@ -25,6 +29,17 @@ export class CompanyComponent implements OnInit {
       .subscribe(
         companies => this.companies = companies,
         error =>  this.errorMessage = <any>error);
+
+    this.dataService.getRecords("company")
+      .subscribe(
+        companies => this.originalCompanies = companies,
+         error => this.errorMessage = <any>error);
+  }
+
+  @HostListener('input') onInput(){
+    if(this.filterBy=='companyName'){
+      this.companies = this.originalCompanies.filter(c=> c.name.toLowerCase().includes(this.searchText.toLowerCase()));
+    } 
   }
 
   deleteCompany(id:number) {
@@ -54,5 +69,4 @@ export class CompanyComponent implements OnInit {
       return 0;
     })
   }
-
 }
