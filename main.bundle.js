@@ -1087,7 +1087,7 @@ var ContactComponent = (function () {
     };
     ContactComponent.prototype.companySort = function (contacts) {
         contacts.sort(function (a, b) {
-            var nameA = a.client.toLowerCase(), nameB = b.client.toLowerCase();
+            var nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
             if (nameA < nameB)
                 return -1;
             if (nameA > nameB)
