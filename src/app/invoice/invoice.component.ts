@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { DataService } from '../data.service'
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
 import { fadeInAnimation } from '../animations/fade-in.animation';
@@ -15,6 +14,9 @@ export class InvoiceComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   invoices: any[];
+  originalInvoices: any[];
+  searchText: string = '';
+  filterBy: string = '';
 
   constructor (private dataService: DataService) {}
 
@@ -25,6 +27,25 @@ export class InvoiceComponent implements OnInit {
       .subscribe(
         results => this.invoices = results,
         error =>  this.errorMessage = <any>error);
+    this.dataService.getRecords("invoice")
+      .subscribe(
+        results => this.originalInvoices = results,
+        error => this.errorMessage = <any>error);
+  }
+
+  @HostListener('input') onInput(){
+    if(this.filterBy=='description'){
+      this.invoices = this.originalInvoices.filter(i=> i.invoiceDescription.toLowerCase().includes(this.searchText.toLowerCase()));
+    } 
+    else if(this.filterBy=='client'){
+      this.invoices = this.originalInvoices.filter(i=> i.company.name.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='createdBy'){
+      this.invoices = this.originalInvoices.filter(i=> i.createdBy.username.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='createdOn'){
+      this.invoices = this.originalInvoices.filter(i=> i.createdOn.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
   }
 
   idSort(invoices: any) {
