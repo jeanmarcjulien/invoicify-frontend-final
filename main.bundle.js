@@ -446,7 +446,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/billing-record/billing-record.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Billing Records</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Billing Records</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/billing-record/add\">Add Billing Record</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Description <button (click)=\"descSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Client <button (click)=\"clientSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Type</th>\r\n        <th>Created By</th>\r\n        <th>Total</th>\r\n        <!-- <th>Admin</th> -->\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let billingRecord of billingRecords\">\r\n        <td>{{billingRecord.id}}</td>\r\n        <td>{{billingRecord.description}}</td>\r\n        <td>{{billingRecord.client.name}}</td>\r\n        <td>{{(billingRecord.rate && billingRecord.quantity) ? \"Rate Based\" : \"Flat Fee\"}}</td>\r\n        <td>{{billingRecord.createdBy.username}}</td>\r\n        <td>{{billingRecord.total}}</td>\r\n        <!-- <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/billing-record/edit/', billingRecord.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteBillingRecord(billingRecord.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td> -->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Billing Records</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Billing Records</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/billing-record/add\">Add Billing Record</a>\r\n\r\n  <select [(ngModel)]=\"filterBy\">\r\n      <option value=\"description\">Description</option>\r\n      <option value=\"companyName\">Client</option>\r\n      <option value=\"createdBy\">Created By</option>\r\n  </select>\r\n\r\n  <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" >\r\n  <label for=\"search\">Search</label>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Description <button (click)=\"descSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Client <button (click)=\"clientSort(billingRecords)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Type</th>\r\n        <th>Created By</th>\r\n        <th>Total</th>\r\n        <!-- <th>Admin</th> -->\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let billingRecord of billingRecords\">\r\n        <td>{{billingRecord.id}}</td>\r\n        <td>{{billingRecord.description}}</td>\r\n        <td>{{billingRecord.client.name}}</td>\r\n        <td>{{(billingRecord.rate && billingRecord.quantity) ? \"Rate Based\" : \"Flat Fee\"}}</td>\r\n        <td>{{billingRecord.createdBy.username}}</td>\r\n        <td>{{billingRecord.total}}</td>\r\n        <!-- <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/billing-record/edit/', billingRecord.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteBillingRecord(billingRecord.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td> -->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -476,12 +476,28 @@ var BillingRecordComponent = (function () {
     function BillingRecordComponent(dataService, dialog) {
         this.dataService = dataService;
         this.dialog = dialog;
+        this.searchText = '';
+        this.filterBy = '';
     }
     BillingRecordComponent.prototype.ngOnInit = function () { this.getBillingRecords(); };
     BillingRecordComponent.prototype.getBillingRecords = function () {
         var _this = this;
         this.dataService.getRecords("billing-record")
             .subscribe(function (results) { return _this.billingRecords = results; }, function (error) { return _this.errorMessage = error; });
+        this.dataService.getRecords("billing-record")
+            .subscribe(function (results) { return _this.originalBR = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    BillingRecordComponent.prototype.onInput = function () {
+        var _this = this;
+        if (this.filterBy == 'description') {
+            this.billingRecords = this.originalBR.filter(function (br) { return br.description.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
+        else if (this.filterBy == 'companyName') {
+            this.billingRecords = this.originalBR.filter(function (br) { return br.client.name.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
+        else if (this.filterBy == 'createdBy') {
+            this.billingRecords = this.originalBR.filter(function (br) { return br.createdBy.username.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
     };
     BillingRecordComponent.prototype.idSort = function (billingRecords) {
         billingRecords.sort(function (a, b) {
@@ -510,6 +526,12 @@ var BillingRecordComponent = (function () {
     };
     return BillingRecordComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* HostListener */])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BillingRecordComponent.prototype, "onInput", null);
 BillingRecordComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
         selector: 'app-billing-record',
@@ -686,7 +708,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/company/company.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Companies</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Companies</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company/add\">Add Company</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Name <button (click)=\"companySort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let company of companies\">\r\n        <td>{{company.id}}</td>\r\n        <td>{{company.name}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/company/edit/', company.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteCompany(company.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Companies</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Companies</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/company/add\">Add Company</a>\r\n\r\n    <select [(ngModel)]=\"filterBy\">\r\n      <option value=\"companyName\">Company Name</option>\r\n    </select>\r\n\r\n    <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" >\r\n    <label for=\"search\">Search</label>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID <button (click)=\"idSort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Name <button (click)=\"companySort(companies)\" class=\"sort\">&#x2195;</button></th>\r\n        <th>Action</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let company of companies\">\r\n        <td>{{company.id}}</td>\r\n        <td>{{company.name}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/company/edit/', company.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteCompany(company.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -714,16 +736,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CompanyComponent = (function () {
     function CompanyComponent(dataService, dialog) {
         this.dataService = dataService;
         this.dialog = dialog;
+        this.searchText = '';
+        this.filterBy = '';
     }
     CompanyComponent.prototype.ngOnInit = function () { this.getCompanies(); };
     CompanyComponent.prototype.getCompanies = function () {
         var _this = this;
         this.dataService.getRecords("company")
             .subscribe(function (companies) { return _this.companies = companies; }, function (error) { return _this.errorMessage = error; });
+        this.dataService.getRecords("company")
+            .subscribe(function (companies) { return _this.originalCompanies = companies; }, function (error) { return _this.errorMessage = error; });
+    };
+    CompanyComponent.prototype.onInput = function () {
+        var _this = this;
+        if (this.filterBy == 'companyName') {
+            this.companies = this.originalCompanies.filter(function (c) { return c.name.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
     };
     CompanyComponent.prototype.deleteCompany = function (id) {
         var _this = this;
@@ -752,6 +785,12 @@ var CompanyComponent = (function () {
     };
     return CompanyComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* HostListener */])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], CompanyComponent.prototype, "onInput", null);
 CompanyComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
         selector: 'app-company',
@@ -951,7 +990,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/contact/contact.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <div class=\"topStuff\">\r\n    <div class=\"leftStuff\">\r\n      <h2>Contacts</h2>\r\n      <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n    </div>\r\n    \r\n    <div class=\"filterStuff\">\r\n      <div class=\"selectAndLabel\">\r\n        <label for=\"filter\">Filter By</label>\r\n        <select [(ngModel)]=\"filterBy\" id=\"filter\">\r\n            <option value=\"fName\">First Name</option>\r\n            <option value=\"lName\">Last Name</option>\r\n            <option value=\"companyName\">Company Name</option>\r\n            <option value=\"type\">Contact Type</option>\r\n            <option value=\"email\">Email</option>\r\n            <option value=\"phoneNumber\">Phone Number</option>\r\n        </select>\r\n      </div>\r\n      <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" placeholder=\"Search\">\r\n    </div>\r\n  </div>\r\n    \r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\" >\r\n    <thead>\r\n\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>First Name<button (click)=\"firstNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Last Name<button (click)=\"lastNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Company<button (click)=\"companySort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Type</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.client}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td><a [href]=\"setSkypeNumber(contact.phoneNumber)\">{{contact.phoneNumber}}</a></td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
+module.exports = "<section @fadeInAnimation> \r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Contacts</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <div class=\"topStuff\">\r\n    <div class=\"leftStuff\">\r\n      <h2>Contacts</h2>\r\n      <a class=\"btn btn-primary\" routerLink=\"/contact/add\">Add Contact</a>\r\n    </div>\r\n    \r\n    <div class=\"filterStuff\">\r\n      <div class=\"selectAndLabel\">\r\n        <label for=\"filter\">Filter By</label>\r\n        <select [(ngModel)]=\"filterBy\" id=\"filter\">\r\n            <option value=\"fName\">First Name</option>\r\n            <option value=\"lName\">Last Name</option>\r\n            <option value=\"companyName\">Company Name</option>\r\n            <option value=\"type\">Contact Type</option>\r\n            <option value=\"email\">Email</option>\r\n            <option value=\"phoneNumber\">Phone Number</option>\r\n        </select>\r\n      </div>\r\n      <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" placeholder=\"Search\">\r\n    </div>\r\n  </div>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\" >\r\n    <thead>\r\n\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>First Name<button (click)=\"firstNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Last Name<button (click)=\"lastNameSort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Company<button (click)=\"companySort(contacts)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Type</th>\r\n          <th>Email</th>\r\n          <th>Phone Number</th>\r\n          <th>Added By</th>\r\n          <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let contact of contacts\">\r\n        <td>{{contact.id}}</td>\r\n        <td>{{contact.firstName}}</td>\r\n        <td>{{contact.lastName}}</td>\r\n        <td>{{contact.client}}</td>\r\n        <td>{{contact.type}}</td>\r\n        <td><a href=\"mailto:{{contact.email}}\">{{contact.email}}</a></td>\r\n        <td><a [href]=\"setSkypeNumber(contact.phoneNumber)\">{{contact.phoneNumber}}</a></td>\r\n        <td>{{contact.user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/contact/edit/', contact.id]\">Edit</a>&nbsp;\r\n          <button (click)=\"deleteContact(contact.id)\" class=\"btn btn-danger\">Delete</button>\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>"
 
 /***/ }),
 
@@ -987,8 +1026,7 @@ var ContactComponent = (function () {
         this.dialog = dialog;
         this.sanitizer = sanitizer;
         this.searchText = '';
-        this.prevSearchText = '';
-        this.filterBy = 'No Filter';
+        this.filterBy = '';
     }
     ContactComponent.prototype.ngOnInit = function () { this.getContacts(); };
     ContactComponent.prototype.setSkypeNumber = function (n) {
@@ -1049,7 +1087,7 @@ var ContactComponent = (function () {
     };
     ContactComponent.prototype.companySort = function (contacts) {
         contacts.sort(function (a, b) {
-            var nameA = a.client.name.toLowerCase(), nameB = b.client.name.toLowerCase();
+            var nameA = a.client.toLowerCase(), nameB = b.client.toLowerCase();
             if (nameA < nameB)
                 return -1;
             if (nameA > nameB)
@@ -1490,7 +1528,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/invoice/invoice.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Description <button (click)=\"descSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Client <button (click)=\"clientSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
+module.exports = "<section @fadeInAnimation>\r\n    <ol class=\"breadcrumb\">\r\n        <li><a routerLink=\"/home\">Home</a></li>\r\n        <li class=\"active\">Invoices</li>\r\n    </ol>\r\n  \r\n    <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n  \r\n    <h2>Invoices</h2>\r\n  \r\n    <a class=\"btn btn-primary\" routerLink=\"/invoice/add\">Add Invoice</a>\r\n  \r\n    <select [(ngModel)]=\"filterBy\">\r\n        <option value=\"description\">Description</option>\r\n        <option value=\"client\">Client</option>\r\n        <option value=\"createdBy\">Created By</option>\r\n        <option value=\"createdOn\">Created On</option>\r\n      </select>\r\n\r\n      <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" >\r\n      <label for=\"search\">Search</label>\r\n\r\n    <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n      <thead>\r\n        <tr>\r\n          <th>ID <button (click)=\"idSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Description <button (click)=\"descSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Client <button (click)=\"clientSort(invoices)\" class=\"sort\">&#x2195;</button></th>\r\n          <th>Line Items</th>\r\n          <th>Created By</th>\r\n          <th>Created On</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let invoice of invoices\">\r\n          <td>{{invoice.id}}</td>\r\n          <td>{{invoice.invoiceDescription}}</td>\r\n          <td>{{invoice.company.name}}</td>\r\n          <td>{{invoice.lineItems.length}}</td>\r\n          <td>{{invoice.createdBy.username}}</td>\r\n          <td>{{invoice.createdOn}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </section>\r\n  "
 
 /***/ }),
 
@@ -1517,12 +1555,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var InvoiceComponent = (function () {
     function InvoiceComponent(dataService) {
         this.dataService = dataService;
+        this.searchText = '';
+        this.filterBy = '';
     }
     InvoiceComponent.prototype.ngOnInit = function () { this.getInvoices(); };
     InvoiceComponent.prototype.getInvoices = function () {
         var _this = this;
         this.dataService.getRecords("invoice")
             .subscribe(function (results) { return _this.invoices = results; }, function (error) { return _this.errorMessage = error; });
+        this.dataService.getRecords("invoice")
+            .subscribe(function (results) { return _this.originalInvoices = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    InvoiceComponent.prototype.onInput = function () {
+        var _this = this;
+        if (this.filterBy == 'description') {
+            this.invoices = this.originalInvoices.filter(function (i) { return i.invoiceDescription.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
+        else if (this.filterBy == 'client') {
+            this.invoices = this.originalInvoices.filter(function (i) { return i.company.name.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
+        else if (this.filterBy == 'createdBy') {
+            this.invoices = this.originalInvoices.filter(function (i) { return i.createdBy.username.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
+        else if (this.filterBy == 'createdOn') {
+            this.invoices = this.originalInvoices.filter(function (i) { return i.createdOn.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
     };
     InvoiceComponent.prototype.idSort = function (invoices) {
         invoices.sort(function (a, b) {
@@ -1551,6 +1608,12 @@ var InvoiceComponent = (function () {
     };
     return InvoiceComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* HostListener */])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], InvoiceComponent.prototype, "onInput", null);
 InvoiceComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
         selector: 'app-invoice',
@@ -1963,7 +2026,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Users</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Users</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/user/add\">Add User</a>\r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>username</th>\r\n        <th>Actions</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let user of users\">\r\n        <td>{{user.id}}</td>\r\n        <td>{{user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/user/edit/', user.id]\">Edit</a>&nbsp;\r\n          <!-- <button (click)=\"deleteUser(user.id)\" class=\"btn btn-danger\">Delete</button> -->\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
+module.exports = "<section @fadeInAnimation>\r\n  <ol class=\"breadcrumb\">\r\n      <li><a routerLink=\"/home\">Home</a></li>\r\n      <li class=\"active\">Users</li>\r\n  </ol>\r\n\r\n  <app-status-message [successMessage]=\"successMessage\" [errorMessage]=\"errorMessage\"></app-status-message>\r\n\r\n  <h2>Users</h2>\r\n\r\n  <a class=\"btn btn-primary\" routerLink=\"/user/add\">Add User</a>\r\n\r\n  <select [(ngModel)]=\"filterBy\">\r\n      <option value=\"uname\">Username</option>\r\n  </select>\r\n\r\n    <input type=\"text\" [(ngModel)]=\"searchText\" id=\"search\" >\r\n    <label for=\"search\">Search</label> \r\n\r\n  <table class=\"table table-striped table-bordered\" id=\"dataTable\" style=\"width:100%\">\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>username</th>\r\n        <th>Actions</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let user of users\">\r\n        <td>{{user.id}}</td>\r\n        <td>{{user.username}}</td>\r\n        <td class=\"text-center\">\r\n          <a class=\"btn btn-primary\" [routerLink]=\"['/user/edit/', user.id]\">Edit</a>&nbsp;\r\n          <!-- <button (click)=\"deleteUser(user.id)\" class=\"btn btn-danger\">Delete</button> -->\r\n        </td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1995,12 +2058,22 @@ var UserComponent = (function () {
     function UserComponent(dataService, dialog) {
         this.dataService = dataService;
         this.dialog = dialog;
+        this.searchText = '';
+        this.filterBy = '';
     }
     UserComponent.prototype.ngOnInit = function () { this.getUsers(); };
     UserComponent.prototype.getUsers = function () {
         var _this = this;
         this.dataService.getRecords("user")
             .subscribe(function (results) { return _this.users = results; }, function (error) { return _this.errorMessage = error; });
+        this.dataService.getRecords("user")
+            .subscribe(function (results) { return _this.originalUsers = results; }, function (error) { return _this.errorMessage = error; });
+    };
+    UserComponent.prototype.onInput = function () {
+        var _this = this;
+        if (this.filterBy == 'uname') {
+            this.users = this.originalUsers.filter(function (u) { return u.username.toLowerCase().includes(_this.searchText.toLowerCase()); });
+        }
     };
     UserComponent.prototype.deleteUser = function (id) {
         var _this = this;
@@ -2014,6 +2087,12 @@ var UserComponent = (function () {
     };
     return UserComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* HostListener */])('input'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserComponent.prototype, "onInput", null);
 UserComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* Component */])({
         selector: 'app-user',
