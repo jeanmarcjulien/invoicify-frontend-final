@@ -20,6 +20,7 @@ export class ContactComponent implements OnInit {
   originalContacts: any[];
   searchText: string = '';
   prevSearchText: string = '';
+  filterBy: string = 'No Filter';
 
   constructor(private dataService: DataService, public dialog: MatDialog, private sanitizer:DomSanitizer) {}
 
@@ -41,11 +42,24 @@ export class ContactComponent implements OnInit {
   }
 
   @HostListener('input') onInput(){
-    console.log(this.originalContacts);
-      console.log(this.searchText);
-      this.contacts = this.originalContacts.filter(c=> c.firstName.includes(this.searchText));
-      console.log(this.searchText)
-      //console.log(filteredContacts);
+    if(this.filterBy=='fName'){
+      this.contacts = this.originalContacts.filter(c=> c.firstName.toLowerCase().includes(this.searchText.toLowerCase()));
+    } 
+    else if(this.filterBy=='lName'){
+      this.contacts = this.originalContacts.filter(c=> c.lastName.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='email'){
+      this.contacts = this.originalContacts.filter(c=> c.email.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='companyName'){
+      this.contacts = this.originalContacts.filter(c=> c.client.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='phoneNumber'){
+      this.contacts = this.originalContacts.filter(c=> c.phoneNumber.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='type'){
+      this.contacts = this.originalContacts.filter(c=> c.type.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
   }
 
   idSort(contacts: any) {
