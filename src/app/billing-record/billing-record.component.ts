@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
-
 import { DataService } from '../data.service'
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component'
 import { fadeInAnimation } from '../animations/fade-in.animation';
@@ -16,6 +15,9 @@ export class BillingRecordComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   billingRecords: any[];
+  originalBR: any[];
+  searchText: string = '';
+  filterBy: string = '';
 
   constructor (private dataService: DataService, public dialog: MatDialog) {}
 
@@ -26,6 +28,22 @@ export class BillingRecordComponent implements OnInit {
       .subscribe(
         results => this.billingRecords = results,
         error =>  this.errorMessage = <any>error);
+    this.dataService.getRecords("billing-record")
+      .subscribe(
+        results => this.originalBR = results,
+        error => this.errorMessage = <any>error);
+  }
+
+  @HostListener('input') onInput(){
+    if(this.filterBy=='description'){
+      this.billingRecords = this.originalBR.filter(br=> br.description.toLowerCase().includes(this.searchText.toLowerCase()));
+    } 
+    else if(this.filterBy=='companyName'){
+      this.billingRecords = this.originalBR.filter(br=> br.client.name.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    else if(this.filterBy=='createdBy'){
+      this.billingRecords = this.originalBR.filter(br=> br.createdBy.username.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
   }
 
   idSort(billingRecords: any) {
