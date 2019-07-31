@@ -19,8 +19,7 @@ export class ContactComponent implements OnInit {
   contacts: any[];
   originalContacts: any[];
   searchText: string = '';
-  prevSearchText: string = '';
-  filterBy: string = 'No Filter';
+  filterBy: string = '';
 
   constructor(private dataService: DataService, public dialog: MatDialog, private sanitizer:DomSanitizer) {}
 
