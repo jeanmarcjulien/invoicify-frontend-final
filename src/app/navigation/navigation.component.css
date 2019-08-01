@@ -12,6 +12,10 @@ nav {
     color: white;
 }
 
+.navbar-inverse {
+    border-color: grey;
+}
+
 a {
     color: black;
 }
