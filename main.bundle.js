@@ -1637,7 +1637,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".flexbox{\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-direction: column;\r\n        flex-direction: column;\r\n}\r\n\r\n.logout {\r\n    cursor: pointer;\r\n}", ""]);
+exports.push([module.i, ".flexbox{\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -ms-flex-direction: column;\r\n        flex-direction: column;\r\n}\r\nnav {\r\n    background-color: grey;\r\n}\r\n.logout {\r\n    cursor: pointer;\r\n}\r\n.navbar-nav>li>a, .navbar-text{\r\n    color: white;\r\n}\r\n\r\n.navbar-inverse {\r\n    border-color: grey;\r\n}\r\n\r\na {\r\n    color: black;\r\n}\r\n\r\n.btn {\r\n    background-color: #5f285E;\r\n    border-color: black;\r\n}\r\n\r\n.btn-info {\r\n    border-color: black;\r\n}\r\n\r\n.btn-info:hover {\r\n    background-color: #8A3575;\r\n}\r\n\r\n.btn-success:hover {\r\n    border-color: black;\r\n    background-color: #8A3575;\r\n}\r\n\r\n.btn[disabled]:hover {\r\n    background-color: #5f285E\r\n}\r\n\r\n.navbar-nav>li>a {\r\n    padding-top: 16px;\r\n    padding-bottom: 16px;\r\n}\r\n\r\n.navbar-nav>li>a:hover {\r\n    background-color: #555555;\r\n}\r\n\r\n", ""]);
 
 // exports
 
