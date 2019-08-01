@@ -10,10 +10,12 @@ th{
 td {
     white-space: nowrap;
 }
-table {
-  margin-left:-15%;
-  margin-top: 2%;
+
+div.table {
+  display: flex;
+  justify-content: center;
 }
+
 div.filterStuff {
   display: flex;
   justify-content: flex-start;
