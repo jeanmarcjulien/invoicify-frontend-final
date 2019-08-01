@@ -22,13 +22,11 @@ div.filterStuff {
 }
 div.selectAndLabel {
   flex-direction:row;
+  margin-top: 10%;
 }
 div.topStuff {
   display: flex;
   justify-content: space-between;
-}
-div.rightStuff {
-  vertical-align: 1em;
 }
 h2 {
   line-height: 0;

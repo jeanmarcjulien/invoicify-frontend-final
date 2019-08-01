@@ -5,23 +5,28 @@
   </ol>
 
   <app-status-message [successMessage]="successMessage" [errorMessage]="errorMessage"></app-status-message>
-
-  <h2>Users</h2>
-
-  <a class="btn btn-primary" routerLink="/user/add">Add User</a>
-
-  <select [(ngModel)]="filterBy">
-      <option value="uname">Username</option>
-  </select>
-
-    <input type="text" [(ngModel)]="searchText" id="search" >
-    <label for="search">Search</label> 
+  
+  <div class="topStuff">
+    <div class="leftStuff">
+      <h2>Users</h2>
+      <a class="btn btn-primary" routerLink="/user/add">Add User</a>
+    </div>
+    <div class="filterStuff">
+      <div class="selectAndLabel">
+        <label for="filter">Filter By</label> 
+        <select [(ngModel)]="filterBy">
+            <option value="uname">Username</option>
+        </select>
+      </div>
+      <input type="text" [(ngModel)]="searchText" id="search" placeholder="Search">
+    </div>
+  </div>
 
   <table class="table table-striped table-bordered" id="dataTable" style="width:100%">
     <thead>
       <tr>
         <th>ID</th>
-        <th>username</th>
+        <th>Username</th>
         <th>Actions</th>
       </tr>
     </thead>
