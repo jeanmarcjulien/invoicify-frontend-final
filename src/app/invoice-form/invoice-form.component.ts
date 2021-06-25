@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import 'rxjs/add/operator/do';
 
 import { DataService } from '../data.service'
 import { fadeInAnimation } from '../animations/fade-in.animation';
@@ -19,6 +20,7 @@ export class InvoiceFormComponent implements OnInit {
   @ViewChild('invoiceForm') currentForm: NgForm;
 
   successMessage: string;
+  selectedClient: string = null;
   errorMessage: string;
   billingRecords: any[];
   companies: any[];
@@ -29,17 +31,18 @@ export class InvoiceFormComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit() { 
-    this.getBillingRecords(); 
+  ngOnInit() {
+    // this.getBillingRecords();
     this.getCompanies();
-
   }
 
-  getBillingRecords() {
-    this.dataService.getRecords("billing-record")
+  getBillingRecordsById(id) {
+    this.dataService.getRecords("billing-record/" + id)
+      .do(data => console.log(data))
       .subscribe(
         results => this.billingRecords = results,
-        error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any>error)
+
   }
 
   getCompanies() {
